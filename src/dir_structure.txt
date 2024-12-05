@@ -1,0 +1,47 @@
+.
+├── __init__.py
+├── __pycache__
+│   └── Linux_cheats_cli.cpython-311.pyc
+├── dir_structure.txt
+├── linux_cheats_cli
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-311.pyc
+│   │   └── main.cpython-311.pyc
+│   ├── main.py
+│   ├── output
+│   │   ├── assets
+│   │   │   ├── css
+│   │   │   │   └── style.css
+│   │   │   └── images
+│   │   │       ├── aire-logo-official.jpeg
+│   │   │       └── favicon.ico
+│   │   └── linux_cheatsheet.html
+│   ├── public
+│   │   ├── assets
+│   │   │   ├── css
+│   │   │   │   └── style.css
+│   │   │   └── images
+│   │   │       ├── aire-logo-official.jpeg
+│   │   │       └── favicon.ico
+│   │   ├── linux_cheats.txt
+│   │   └── templates
+│   │       ├── base.html
+│   │       └── index.html
+│   └── utils
+│       ├── __init__.py
+│       ├── __pycache__
+│       │   ├── __init__.cpython-311.pyc
+│       │   ├── convert_to_md.cpython-311.pyc
+│       │   └── template.cpython-311.pyc
+│       ├── convert_to_md.py
+│       └── template.py
+└── linux_cheats_cli.egg-info
+    ├── PKG-INFO
+    ├── SOURCES.txt
+    ├── dependency_links.txt
+    ├── entry_points.txt
+    ├── requires.txt
+    └── top_level.txt
+
+16 directories, 29 files

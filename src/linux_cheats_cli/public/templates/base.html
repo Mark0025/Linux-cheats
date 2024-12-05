@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="icon" type="image/x-icon" href="assets/public/images/favicon.ico">
+    
+    <!-- AIRE Branding Meta Tags -->
+    <meta property="og:title" content="${og_title|Linux Commands Cheat Sheet - Powered by AIRE}">
+    <meta property="og:description" content="${og_description|A comprehensive Linux commands cheat sheet by The AI Real Estate Investor}">
+    <meta property="og:image" content="${og_image|https://www.theairealestateinvestor.com/assets/images/banner.jpg}">
+    <meta name="twitter:card" content="summary_large_image">
+    ${head_extras}
+</head>
+<body>
+    <!-- AIRE Banner -->
+    <div class="aire-banner">
+        <img src="assets/images/aire-logo-official.jpeg" alt="AIRE Logo" class="aire-logo-img">
+        <h1>${header_title}</h1>
+        <p>${header_subtitle}</p>
+        ${banner_content}
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        ${content}
+    </div>
+
+    <!-- AIRE Footer -->
+    ${footer}
+
+    <!-- Scripts -->
+    ${scripts}
+</body>
+</html>
