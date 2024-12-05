@@ -1,0 +1,9 @@
+pandoc>=2.4
+markdown>=3.4
+loguru>=0.7.0
+Pillow>=9.5.0
+python-dotenv>=1.0.0
+rich>=10.0.0
+termcolor>=2.3.0
+pypandoc>=1.11
+click>=8.0.0

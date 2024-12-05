@@ -16,6 +16,8 @@ from .utils.convert_to_md import convert_text_to_markdown
 from .utils.template import render_template
 import pypandoc  # Import pypandoc for markdown conversion
 from PIL import Image  # Add this import at the top
+from .utils.cli_renderer import print_cli_version
+import socket  # Add this at the top
 
 # Configure loguru
 logger.remove()  # Remove default handler
@@ -82,8 +84,7 @@ def convert_markdown_to_html(input_file, output_file):
         return False
 
 def find_free_port(start_port=8000, max_attempts=100):
-    """Find a free port starting from start_port"""
-    import socket
+    """Find first available port starting from start_port"""
     for port in range(start_port, start_port + max_attempts):
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
@@ -93,27 +94,41 @@ def find_free_port(start_port=8000, max_attempts=100):
             continue
     raise RuntimeError(f"Could not find a free port after {max_attempts} attempts")
 
-def serve_html(output_dir, port=None):
+def serve_html(output_dir, port=None, auto_open=True):
     """Serve HTML file locally"""
     try:
-        os.chdir(output_dir)  # Change to output directory to serve assets correctly
+        # Change to output directory
+        os.chdir(output_dir)
         
-        # Find a free port if none specified
         if port is None:
             port = find_free_port()
         
         Handler = http.server.SimpleHTTPRequestHandler
         with socketserver.TCPServer(("", port), Handler) as httpd:
             url = f"http://localhost:{port}/linux_cheatsheet.html"
-            print(f"\n🌐 Server running at: \033[36m{url}\033[0m")
+            
+            # Show welcome banner with full branding
+            print("\n" + "="*50)
+            print("   🚀 === Linux Cheats CLI === 🚀")
+            print("    Powered by The AI Real Estate Investor")
+            print("\n    💡 Pro Tip: Try 'linux-cheats --aire' for special commands!")
+            print("    🎁 Hidden Feature: Look for the easter egg in the web view")
+            print("\n    Join our AI Revolution:")
+            print("    🌐 www.theairealestateinvestor.com")
+            print("    📱 facebook.com/aireinvestor")
+            print("\n")
+            print(f"🌐 Server running at: {url}")
             print("📋 Click the link above or copy/paste it into your browser")
             print("\n💡 Press Ctrl+C to stop the server\n")
             
-            webbrowser.open(url)
+            if auto_open:
+                webbrowser.open(url)
+            
             httpd.serve_forever()
+            
     except Exception as e:
         print(f"Error starting server: {e}")
-        sys.exit(1)
+        raise
 
 def print_welcome_banner():
     """Print a fancy welcome banner with easter eggs"""
@@ -190,50 +205,80 @@ def copy_assets(output_dir):
         logger.exception(f"Failed to copy assets: {str(e)}")
         raise
 
+def print_first_run_message():
+    """Print a welcome message on first run"""
+    message = """
+    🎉 Welcome to Linux Cheats CLI! 🎉
+    
+    Thanks for installing! The web interface should open automatically.
+    If it doesn't, visit: http://localhost:8000/linux_cheatsheet.html
+    
+    To run again later, just type:
+    $ linux-cheats
+    
+    Enjoy! 🚀
+    """
+    print(message)
+
 def main():
     """Main entry point for the CLI"""
     try:
-        logger.info("🚀 Starting Linux Cheats CLI")
-        
-        # Define paths
+        # Define base_dir first
         base_dir = os.path.dirname(__file__)
-        input_file = os.path.join(base_dir, 'public', 'linux_cheats.txt')
-        output_dir = os.path.join(base_dir, 'output')
-        md_file = os.path.join(output_dir, 'linux_cheatsheet.md')
-        html_file = os.path.join(output_dir, 'linux_cheatsheet.html')
-        
-        # Create output directory
-        os.makedirs(output_dir, exist_ok=True)
-        logger.info("📁 Created output directory")
-        
-        # Copy assets
-        logger.info("🎨 Setting up assets...")
-        copy_assets(output_dir)
-        
-        # Convert TXT to MD
-        logger.info("📝 Converting text to markdown...")
-        if not convert_text_to_markdown(input_file, md_file):
-            raise Exception("Failed to convert text to markdown")
-            
-        # Convert MD to HTML
-        logger.info("🌐 Converting markdown to HTML...")
-        if not convert_markdown_to_html(md_file, html_file):
-            raise Exception("Failed to convert markdown to HTML")
-        
-        # Show welcome banner
-        print_welcome_banner()
-        
-        # Start server
-        logger.info("🌐 Starting local server...")
-        serve_html(output_dir)
-        
+
+        # Parse arguments
+        parser = argparse.ArgumentParser(description='Linux Cheats CLI')
+        parser.add_argument('--web', action='store_true', 
+                          help='Start web interface only')
+        parser.add_argument('--cli', action='store_true',
+                          help='Show CLI version only')
+        parser.add_argument('--no-browser', action='store_true', 
+                          help='Do not automatically open browser')
+        parser.add_argument('-v', '--version', action='version',
+                          version='%(prog)s 0.1')
+        args = parser.parse_args()
+
+        # Default behavior (no args): show both CLI and web
+        show_cli = True if not args.web else args.cli
+        show_web = True if not args.cli else args.web
+
+        # Show CLI version if requested
+        if show_cli:
+            input_file = os.path.join(base_dir, 'public', 'linux_cheats.txt')
+            with open(input_file, 'r') as f:
+                data = f.read()
+            print_cli_version(data)
+
+        # Start web server if requested
+        if show_web:
+            logger.info("🚀 Starting Linux Cheats Web Interface")
+            setup_web_interface(base_dir, not args.no_browser)
+
     except KeyboardInterrupt:
-        logger.info("\n👋 Shutting down server...")
+        logger.info("\n👋 Shutting down...")
         sys.exit(0)
     except Exception as e:
-        logger.exception("❌ Unexpected error in main function")
-        print(f"An unexpected error occurred: {e}")
+        logger.exception("❌ Unexpected error")
+        print(f"Error: {e}")
         sys.exit(1)
+
+def setup_web_interface(base_dir, auto_open=True):
+    """Setup and start web interface"""
+    output_dir = os.path.join(base_dir, 'output')
+    md_file = os.path.join(output_dir, 'linux_cheatsheet.md')
+    html_file = os.path.join(output_dir, 'linux_cheatsheet.html')
+    
+    # Create output directory
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Setup assets and convert files
+    copy_assets(output_dir)
+    convert_text_to_markdown(os.path.join(base_dir, 'public', 'linux_cheats.txt'), md_file)
+    convert_markdown_to_html(md_file, html_file)
+    
+    # Show welcome banner and start server
+    print_welcome_banner()
+    serve_html(output_dir, auto_open=auto_open)
 
 if __name__ == "__main__":
     main()
