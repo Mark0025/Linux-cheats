@@ -38,3 +38,8 @@ ENV/
 
 # OS
 .DS_Store
+
+/Explain.md
+/TODO.md
+    
+        

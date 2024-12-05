@@ -1,0 +1,178 @@
+My outline from chat gpt achetecturing the project 
+
+
+Here’s a step-by-step guide to achieve your goal of serving the Linux commands cheat sheet locally, popping open a terminal in full screen, and displaying the Markdown file beautifully rendered:
+
+1. Convert the Markdown File to HTML
+Markdown is not directly displayable in a browser, so you’ll first need to convert it to an HTML file.
+
+Using pandoc:
+Install pandoc (if not already installed):
+
+bash
+Copy code
+sudo apt install pandoc   # Debian/Ubuntu
+brew install pandoc       # macOS
+Convert your Markdown file to HTML:
+
+bash
+Copy code
+pandoc linux_cheats.md -o linux_cheatsheet.html
+Using Online Converters:
+Alternatively, upload your Markdown file to an online tool like Dillinger.io to convert it to HTML.
+
+2. Serve the HTML Locally
+Use a lightweight local web server to host the HTML file.
+
+Option 1: Using Python
+Start a simple HTTP server:
+
+bash
+Copy code
+python3 -m http.server --directory . 8000
+This serves files in the current directory (.) on port 8000.
+Open the HTML file in a browser:
+
+Visit: http://localhost:8000/linux_cheatsheet.html
+Option 2: Using Node.js
+Install http-server:
+
+bash
+Copy code
+npm install -g http-server
+Serve the directory:
+
+bash
+Copy code
+http-server -p 8000
+Open the HTML file:
+
+Visit: http://localhost:8000/linux_cheatsheet.html
+3. Open Browser Automatically
+To open the browser automatically when the server starts:
+
+For Python:
+Add the webbrowser module:
+
+bash
+Copy code
+python3 -m http.server --directory . 8000 & python3 -c "import webbrowser; webbrowser.open('http://localhost:8000/linux_cheatsheet.html')"
+For Node.js:
+Use the opener module:
+
+bash
+Copy code
+http-server -p 8000 & xdg-open http://localhost:8000/linux_cheatsheet.html
+4. Make It Open in Full-Screen Terminal
+To pop open the terminal and display the server output (or cheat sheet) automatically:
+
+Script to Automate Everything
+Create a script serve_cheatsheet.sh:
+
+bash
+Copy code
+#!/bin/bash
+
+# Full path to the cheatsheet directory
+CHEATSHEET_DIR="$HOME/Linux-cheats"
+
+# Convert Markdown to HTML if it doesn't exist
+if [[ ! -f "$CHEATSHEET_DIR/linux_cheatsheet.html" ]]; then
+    pandoc "$CHEATSHEET_DIR/linux_cheats.md" -o "$CHEATSHEET_DIR/linux_cheatsheet.html"
+fi
+
+# Start a Python server and open the browser
+python3 -m http.server --directory "$CHEATSHEET_DIR" 8000 &
+
+# Wait for server to start
+sleep 1
+
+# Open the browser in full screen
+xdg-open "http://localhost:8000/linux_cheatsheet.html"
+Make it executable:
+
+bash
+Copy code
+chmod +x serve_cheatsheet.sh
+Run it:
+
+bash
+Copy code
+./serve_cheatsheet.sh
+5. Set It to Run Automatically on Terminal Startup
+To make this script run every time you open a terminal:
+
+Add to .bashrc or .zshrc:
+Edit your shell config:
+
+bash
+Copy code
+nano ~/.bashrc   # or ~/.zshrc for Zsh
+Add this line:
+
+bash
+Copy code
+~/Linux-cheats/serve_cheatsheet.sh
+Apply changes:
+
+bash
+Copy code
+source ~/.bashrc
+6. Sweeten the Look
+Use CSS for Styling
+You can enhance the look of your HTML with a simple CSS stylesheet.
+
+Create a styles.css file:
+
+css
+Copy code
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+    background-color: #f4f4f9;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tr:hover {
+    background-color: #ddd;
+}
+Link styles.css to your HTML: Add this line to the <head> section of your HTML:
+
+html
+Copy code
+<link rel="stylesheet" href="styles.css">
+Save the styles.css file in the same directory as your HTML file.
+
+7. Final Workflow Recap
+Generate the HTML from your Markdown using pandoc.
+Serve the HTML locally with a Python or Node.js server.
+Automate the process with a script to:
+Start the server.
+Open the browser.
+Serve the cheat sheet in full-screen mode.
+Enhance the visuals with a linked CSS stylesheet.
+Run the script on terminal startup for an always-available reference.
+Example URL to Share Locally:
+
+After running the script, the cheat sheet will be available at: http://localhost:8000/linux_cheatsheet.html
+Would you like help customizing the CSS or troubleshooting the script? 🚀

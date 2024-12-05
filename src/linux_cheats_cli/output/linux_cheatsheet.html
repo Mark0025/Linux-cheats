@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Linux Commands Cheat Sheet</title>
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="icon" type="image/x-icon" href="assets/public/images/favicon.ico">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/aire-logo-official.jpeg">
     
     <!-- AIRE Branding Meta Tags -->
-    <meta property="og:title" content="${og_title|Linux Commands Cheat Sheet - Powered by AIRE}">
-    <meta property="og:description" content="${og_description|A comprehensive Linux commands cheat sheet by The AI Real Estate Investor}">
-    <meta property="og:image" content="${og_image|https://www.theairealestateinvestor.com/assets/images/banner.jpg}">
+    <meta property="og:title" content="Linux Commands Cheat Sheet - Powered by AIRE">
+    <meta property="og:description" content="A comprehensive Linux commands cheat sheet by The AI Real Estate Investor">
+    <meta property="og:image" content="https://www.theairealestateinvestor.com/assets/images/banner.jpg">
     <meta name="twitter:card" content="summary_large_image">
-    ${head_extras}
 </head>
 <body>
     <!-- AIRE Banner -->
@@ -21,29 +23,384 @@
         <h1>Linux Commands Cheat Sheet</h1>
         <p>Powered by The AI Real Estate Investor</p>
         <div class="aire-links">
-                    <a href="https://www.theairealestateinvestor.com">🌟 Join Our AI Community</a>
-                    <a href="https://www.facebook.com/aireinvestor">📱 Follow Us</a>
-                    <span class="easter-egg">🎁</span>
-                </div>
+            <a href="https://www.theairealestateinvestor.com"> Join Our AI Community</a>
+            <a href="https://www.facebook.com/aireinvestor">📱 Follow Us</a>
+            <span class="easter-egg" title="You found an easter egg! Use code LINUX23 for 20% off our AI Revolutionaries Club">🎁</span>
+        </div>
     </div>
 
     <!-- Main Content -->
     <div class="content">
-        <ol type="1">
-<li>Basic Commands Command | Purpose | Mnemonic | Example —|—|—|— echo | Output text or variables to terminal or file. | Everything Comes Here Out. | echo “Hello” &gt; file.txt cat | Display or concatenate file content. | Think of a cat lying on a book, reading. | cat file1.txt ls | List directory contents. | Look at Stuff. | ls -l pwd | Show current directory path. | Path We’re Doing. | pwd cd | Change to another directory. | Change Direction. | cd /home/user touch | Create a new file or update its timestamp. | Imagine touching a file to create or update it. | touch newfile.txt mkdir | Create a new directory. | Make DIRectory. | mkdir my_folder rm | Delete files or directories. | Remove Mess. | rm file.txt cp | Copy files or directories. | Clone Pieces. | cp file1.txt backup.txt mv | Move or rename files/directories. | Move Values. | mv oldname.txt newname.txt man | Display the manual for a command. | MANual. | man ls clear | Clear the terminal screen. | Start with a clear screen. | clear whoami | Display the current user. | Who am I? | whoami uname | Show system information. | Unique NAME. | uname -a hostname | Display the system hostname. | The name of the host system. | hostname</li>
-<li>File Management Command | Purpose | Mnemonic | Example —|—|—|— nano | Open a simple text editor. | Nano: Small but mighty editor. | nano file.txt vi | Open the vi text editor. | VIsual editor. | vi file.txt less | View file contents page by page. | Read less at a time. | less bigfile.txt head | Display the first few lines of a file. | The head of the file. | head file.txt tail | Display the last few lines of a file. | The tail of the file. | tail file.txt find | Search for files in a directory. | Find things. | find /home -name “*.txt” locate | Quickly locate files by name. | Locate faster than find. | locate file.txt stat | Display detailed info about a file. | Statistics of a file. | stat file.txt file | Determine the file type. | What kind of file is it? | file image.png</li>
-<li>User Management Command | Purpose | Mnemonic | Example —|—|—|— id | Display user ID and group information. | IDentity. | id who | List logged-in users. | Who is online? | who groups | Show groups of the current user. | Groups you belong to. | groups adduser | Add a new user to the system. | Add User. | sudo adduser newuser passwd | Change user password. | Update passwd. | passwd</li>
-<li>Disk and System Info Command | Purpose | Mnemonic | Example —|—|—|— df | Show disk space usage. | Disk Free. | df -h du | Show directory/file sizes. | Disk Usage. | du -sh folder free | Display memory usage. | Show free RAM. | free -h top | Monitor system processes. | Top running processes. | top htop | Interactive process viewer. | Human-friendly top. | htop</li>
-<li>Networking Command | Purpose | Mnemonic | Example —|—|—|— ping | Check connectivity to a host. | Ping a server to “ping-pong.” | ping google.com wget | Download files from the web. | Web GET. | wget http://example.com/file.zip curl | Transfer data from/to a server. | Client URL. | curl http://example.com ifconfig | View or configure network interfaces. | Interface Configuration. | ifconfig netstat | Show network connections. | Network Statistics. | netstat -tuln</li>
-<li>Permissions and Ownership Command | Purpose | Mnemonic | Example —|—|—|— chmod | Change file permissions. | CHange MODe. | chmod 755 file.sh chown | Change file ownership. | CHange OWNer. | sudo chown user:group file.txt umask | Set default permissions. | User MASK. | umask 022</li>
-</ol>
-
+        <h1 id="linux-commands-cheat-sheet">Linux Commands Cheat Sheet</h1>
+        <h2 id="basic">Basic</h2>
+        <table style="width:100%;">
+        <colgroup>
+        <col style="width: 23%" />
+        <col style="width: 26%" />
+        <col style="width: 26%" />
+        <col style="width: 23%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Command</th>
+        <th>Purpose</th>
+        <th>Mnemonic</th>
+        <th>Example</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>echo</code></td>
+        <td>Output text or variables to terminal or file.</td>
+        <td>Everything Comes Here Out.</td>
+        <td><code>echo "Hello" &gt; file.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>cat</code></td>
+        <td>Display or concatenate file content.</td>
+        <td>Think of a cat lying on a book, reading.</td>
+        <td><code>cat file1.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>ls</code></td>
+        <td>List directory contents.</td>
+        <td>Look at Stuff.</td>
+        <td><code>ls -l</code></td>
+        </tr>
+        <tr>
+        <td><code>pwd</code></td>
+        <td>Show current directory path.</td>
+        <td>Path We’re Doing.</td>
+        <td><code>pwd</code></td>
+        </tr>
+        <tr>
+        <td><code>cd</code></td>
+        <td>Change to another directory.</td>
+        <td>Change Direction.</td>
+        <td><code>cd /home/user</code></td>
+        </tr>
+        <tr>
+        <td><code>touch</code></td>
+        <td>Create a new file or update its timestamp.</td>
+        <td>Imagine touching a file to create or update it.</td>
+        <td><code>touch newfile.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>mkdir</code></td>
+        <td>Create a new directory.</td>
+        <td>Make DIRectory.</td>
+        <td><code>mkdir my_folder</code></td>
+        </tr>
+        <tr>
+        <td><code>rm</code></td>
+        <td>Delete files or directories.</td>
+        <td>Remove Mess.</td>
+        <td><code>rm file.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>cp</code></td>
+        <td>Copy files or directories.</td>
+        <td>Clone Pieces.</td>
+        <td><code>cp file1.txt backup.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>mv</code></td>
+        <td>Move or rename files/directories.</td>
+        <td>Move Values.</td>
+        <td><code>mv oldname.txt newname.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>man</code></td>
+        <td>Display the manual for a command.</td>
+        <td>MANual.</td>
+        <td><code>man ls</code></td>
+        </tr>
+        <tr>
+        <td><code>clear</code></td>
+        <td>Clear the terminal screen.</td>
+        <td>Start with a clear screen.</td>
+        <td><code>clear</code></td>
+        </tr>
+        <tr>
+        <td><code>whoami</code></td>
+        <td>Display the current user.</td>
+        <td>Who am I?</td>
+        <td><code>whoami</code></td>
+        </tr>
+        <tr>
+        <td><code>uname</code></td>
+        <td>Show system information.</td>
+        <td>Unique NAME.</td>
+        <td><code>uname -a</code></td>
+        </tr>
+        <tr>
+        <td><code>hostname</code></td>
+        <td>Display the system hostname.</td>
+        <td>The name of the host system.</td>
+        <td><code>hostname</code></td>
+        </tr>
+        </tbody>
+        </table>
+        <h2 id="file-management">File Management</h2>
+        <table style="width:100%;">
+        <colgroup>
+        <col style="width: 23%" />
+        <col style="width: 26%" />
+        <col style="width: 26%" />
+        <col style="width: 23%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Command</th>
+        <th>Purpose</th>
+        <th>Mnemonic</th>
+        <th>Example</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>nano</code></td>
+        <td>Open a simple text editor.</td>
+        <td>Nano: Small but mighty editor.</td>
+        <td><code>nano file.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>vi</code></td>
+        <td>Open the vi text editor.</td>
+        <td>VIsual editor.</td>
+        <td><code>vi file.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>less</code></td>
+        <td>View file contents page by page.</td>
+        <td>Read less at a time.</td>
+        <td><code>less bigfile.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>head</code></td>
+        <td>Display the first few lines of a file.</td>
+        <td>The head of the file.</td>
+        <td><code>head file.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>tail</code></td>
+        <td>Display the last few lines of a file.</td>
+        <td>The tail of the file.</td>
+        <td><code>tail file.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>find</code></td>
+        <td>Search for files in a directory.</td>
+        <td>Find things.</td>
+        <td><code>find /home -name "*.txt"</code></td>
+        </tr>
+        <tr>
+        <td><code>locate</code></td>
+        <td>Quickly locate files by name.</td>
+        <td>Locate faster than find.</td>
+        <td><code>locate file.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>stat</code></td>
+        <td>Display detailed info about a file.</td>
+        <td>Statistics of a file.</td>
+        <td><code>stat file.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>file</code></td>
+        <td>Determine the file type.</td>
+        <td>What kind of file is it?</td>
+        <td><code>file image.png</code></td>
+        </tr>
+        </tbody>
+        </table>
+        <h2 id="user-management">User Management</h2>
+        <table style="width:100%;">
+        <colgroup>
+        <col style="width: 23%" />
+        <col style="width: 26%" />
+        <col style="width: 26%" />
+        <col style="width: 23%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Command</th>
+        <th>Purpose</th>
+        <th>Mnemonic</th>
+        <th>Example</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>id</code></td>
+        <td>Display user ID and group information.</td>
+        <td>IDentity.</td>
+        <td><code>id</code></td>
+        </tr>
+        <tr>
+        <td><code>who</code></td>
+        <td>List logged-in users.</td>
+        <td>Who is online?</td>
+        <td><code>who</code></td>
+        </tr>
+        <tr>
+        <td><code>groups</code></td>
+        <td>Show groups of the current user.</td>
+        <td>Groups you belong to.</td>
+        <td><code>groups</code></td>
+        </tr>
+        <tr>
+        <td><code>adduser</code></td>
+        <td>Add a new user to the system.</td>
+        <td>Add User.</td>
+        <td><code>sudo adduser newuser</code></td>
+        </tr>
+        <tr>
+        <td><code>passwd</code></td>
+        <td>Change user password.</td>
+        <td>Update passwd.</td>
+        <td><code>passwd</code></td>
+        </tr>
+        </tbody>
+        </table>
+        <h2 id="disk-and-system-info">Disk and System Info</h2>
+        <table>
+        <thead>
+        <tr>
+        <th>Command</th>
+        <th>Purpose</th>
+        <th>Mnemonic</th>
+        <th>Example</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>df</code></td>
+        <td>Show disk space usage.</td>
+        <td>Disk Free.</td>
+        <td><code>df -h</code></td>
+        </tr>
+        <tr>
+        <td><code>du</code></td>
+        <td>Show directory/file sizes.</td>
+        <td>Disk Usage.</td>
+        <td><code>du -sh folder</code></td>
+        </tr>
+        <tr>
+        <td><code>free</code></td>
+        <td>Display memory usage.</td>
+        <td>Show free RAM.</td>
+        <td><code>free -h</code></td>
+        </tr>
+        <tr>
+        <td><code>top</code></td>
+        <td>Monitor system processes.</td>
+        <td>Top running processes.</td>
+        <td><code>top</code></td>
+        </tr>
+        <tr>
+        <td><code>htop</code></td>
+        <td>Interactive process viewer.</td>
+        <td>Human-friendly top.</td>
+        <td><code>htop</code></td>
+        </tr>
+        </tbody>
+        </table>
+        <h2 id="networking">Networking</h2>
+        <table style="width:100%;">
+        <colgroup>
+        <col style="width: 23%" />
+        <col style="width: 26%" />
+        <col style="width: 26%" />
+        <col style="width: 23%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Command</th>
+        <th>Purpose</th>
+        <th>Mnemonic</th>
+        <th>Example</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>ping</code></td>
+        <td>Check connectivity to a host.</td>
+        <td>Ping a server to “ping-pong.”</td>
+        <td><code>ping google.com</code></td>
+        </tr>
+        <tr>
+        <td><code>wget</code></td>
+        <td>Download files from the web.</td>
+        <td>Web GET.</td>
+        <td><code>wget http://example.com/file.zip</code></td>
+        </tr>
+        <tr>
+        <td><code>curl</code></td>
+        <td>Transfer data from/to a server.</td>
+        <td>Client URL.</td>
+        <td><code>curl http://example.com</code></td>
+        </tr>
+        <tr>
+        <td><code>ifconfig</code></td>
+        <td>View or configure network interfaces.</td>
+        <td>Interface Configuration.</td>
+        <td><code>ifconfig</code></td>
+        </tr>
+        <tr>
+        <td><code>netstat</code></td>
+        <td>Show network connections.</td>
+        <td>Network Statistics.</td>
+        <td><code>netstat -tuln</code></td>
+        </tr>
+        </tbody>
+        </table>
+        <h2 id="permissions-and-ownership">Permissions and Ownership</h2>
+        <table style="width:100%;">
+        <colgroup>
+        <col style="width: 23%" />
+        <col style="width: 26%" />
+        <col style="width: 26%" />
+        <col style="width: 23%" />
+        </colgroup>
+        <thead>
+        <tr>
+        <th>Command</th>
+        <th>Purpose</th>
+        <th>Mnemonic</th>
+        <th>Example</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>chmod</code></td>
+        <td>Change file permissions.</td>
+        <td>CHange MODe.</td>
+        <td><code>chmod 755 file.sh</code></td>
+        </tr>
+        <tr>
+        <td><code>chown</code></td>
+        <td>Change file ownership.</td>
+        <td>CHange OWNer.</td>
+        <td><code>sudo chown user:group file.txt</code></td>
+        </tr>
+        <tr>
+        <td><code>umask</code></td>
+        <td>Set default permissions.</td>
+        <td>User MASK.</td>
+        <td><code>umask 022</code></td>
+        </tr>
+        </tbody>
+        </table>
+        <hr />
+        <h3 id="powered-by-the-ai-real-estate-investor">Powered by The AI Real Estate Investor</h3>
+        <p>Join our community of AI-powered entrepreneurs: - <a href="https://www.theairealestateinvestor.com">Join Our AI Community</a> - <a href="https://www.facebook.com/aireinvestor">Follow Us on Facebook</a> - <a href="https://www.theairealestateinvestor.com/club">AI Revolutionaries Club</a></p>
+        <p><em>Tip: Look for easter eggs in the commands!</em></p>
     </div>
 
     <!-- AIRE Footer -->
-    <footer><p>© 2024 The AI Real Estate Investor</p></footer>
-
-    <!-- Scripts -->
-    ${scripts}
+    <footer class="aire-footer">
+        <p>© 2024 The AI Real Estate Investor</p>
+    </footer>
 </body>
 </html>

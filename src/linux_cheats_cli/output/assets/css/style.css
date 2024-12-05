@@ -14,8 +14,12 @@ body {
     padding: 20px;
     text-align: center;
     margin-bottom: 30px;
-    border-radius: 8px;
+    border-radius: 0;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    position: relative;
+    width: 100%;
+    left: 0;
+    top: 0;
 }
 
 .aire-logo {
@@ -29,36 +33,79 @@ body {
 }
 
 .content {
-    overflow-x: auto;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-table {
-    border-collapse: collapse;
+.command-table {
     width: 100%;
-    margin-bottom: 20px;
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: 'Monaco', 'Consolas', monospace;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
 }
 
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-table th {
+.command-table thead tr {
     background-color: #2c3e50;
-    color: white;
+    color: #ffffff;
+    text-align: left;
 }
 
-table tr:nth-child(even) {
-    background-color: #f2f2f2;
+.command-table th,
+.command-table td {
+    padding: 12px 15px;
+    white-space: nowrap;
 }
 
-table tr:hover {
-    background-color: #ddd;
+.command-table th:nth-child(1) { min-width: 120px; }  /* Command */
+.command-table th:nth-child(2) { min-width: 200px; }  /* Purpose */
+.command-table th:nth-child(3) { min-width: 150px; }  /* Mnemonic */
+.command-table th:nth-child(4) { min-width: 200px; }  /* Example */
+
+.command-table tbody tr {
+    border-bottom: 1px solid #dddddd;
 }
 
-/* Rest of your existing styles... */
+.command-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
 
-/* Add to your existing CSS */
+.command-table tbody tr:last-of-type {
+    border-bottom: 2px solid #2c3e50;
+}
+
+/* Responsive table wrapper */
+.table-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 20px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Command styling */
+.command {
+    font-weight: bold;
+    color: #2c3e50;
+    background: #f8f9fa;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+/* Example styling */
+.example {
+    font-family: 'Monaco', 'Consolas', monospace;
+    background: #f8f9fa;
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #e83e8c;
+}
+
 .aire-footer {
     text-align: center;
     padding: 20px;
@@ -92,4 +139,82 @@ table tr:hover {
 
 .easter-egg:hover {
     opacity: 1;
+}
+
+/* Logo sizing and positioning */
+.aire-logo-img {
+    max-width: 150px;
+    height: auto;
+    margin: 0 auto 15px;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Favicon specific styles */
+.favicon {
+    width: 32px;
+    height: 32px;
+}
+
+/* Banner text styling */
+.aire-banner h1 {
+    font-size: 2em;
+    margin: 10px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.aire-banner p {
+    font-size: 1.1em;
+    margin: 5px 0;
+    opacity: 0.9;
+}
+
+/* Banner links */
+.aire-links {
+    margin: 15px 0 5px;
+}
+
+.aire-links a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 8px 15px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    font-size: 0.9em;
+}
+
+.aire-links a:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: white;
+    transform: translateY(-1px);
+}
+
+/* Main content padding */
+.content {
+    padding-top: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .aire-banner {
+        padding: 15px;
+    }
+    
+    .aire-logo-img {
+        max-width: 120px;
+    }
+    
+    .aire-banner h1 {
+        font-size: 1.5em;
+    }
+    
+    .aire-links a {
+        display: block;
+        margin: 10px auto;
+        max-width: 200px;
+    }
 } 

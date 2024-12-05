@@ -15,6 +15,7 @@ from loguru import logger
 from .utils.convert_to_md import convert_text_to_markdown
 from .utils.template import render_template
 import pypandoc  # Import pypandoc for markdown conversion
+from PIL import Image  # Add this import at the top
 
 # Configure loguru
 logger.remove()  # Remove default handler
@@ -34,60 +35,51 @@ def check_dependencies():
         print("  Windows: choco install pandoc")
         sys.exit(1)
 
-def convert_markdown_to_html(input_file, html_file):
-    """Convert markdown to HTML using Pandoc"""
+def convert_markdown_to_html(input_file, output_file):
+    """Convert markdown to HTML with proper styling"""
     try:
-        # First convert tab-separated content to markdown table format
+        # Get absolute paths
+        base_dir = os.path.dirname(__file__)
+        template_path = os.path.join(base_dir, 'public', 'templates', 'base.html')
+        css_path = os.path.join(base_dir, 'public', 'assets', 'css', 'style.css')
+        
+        logger.debug(f"Template path: {template_path}")
+        logger.debug(f"CSS path: {css_path}")
+
+        # First convert markdown to intermediate HTML
+        md_content = None
         with open(input_file, 'r') as f:
-            content = f.read()
-            
-        # Convert the content to markdown table format
-        md_content = content.replace('\t', ' | ')
-        md_lines = md_content.split('\n')
-        table_md = []
-        
-        for line in md_lines:
-            if 'Command | Purpose | Mnemonic | Example' in line:
-                # Add header separator for markdown tables
-                table_md.append(line)
-                table_md.append('|'.join(['---' for _ in range(line.count('|') + 1)]))
-            else:
-                table_md.append(line)
-                
-        md_content = '\n'.join(table_md)
-        
-        # Use pandoc to convert markdown to HTML
-        html_content = pypandoc.convert_text(
+            md_content = f.read()
+
+        # Custom pandoc options
+        pandoc_args = [
+            '-f', 'markdown+pipe_tables+inline_code_attributes',
+            '-t', 'html5',
+            '--standalone',
+            f'--template={template_path}',
+            f'--css={css_path}',
+            '--highlight-style=pygments',
+            '--wrap=none',
+            '-V', 'title:Linux Commands Cheat Sheet',
+            '--metadata', 'pagetitle:Linux Commands Cheat Sheet'
+        ]
+
+        # Convert to HTML using pandoc
+        output = pypandoc.convert_text(
             md_content,
             'html',
             format='markdown',
-            extra_args=['--wrap=none']
+            extra_args=pandoc_args,
+            outputfile=output_file
         )
-        
-        # Render the template with the converted HTML
-        template_vars = {
-            'extends': 'base.html',
-            'title': 'Linux Commands Cheat Sheet',
-            'content': html_content,
-            'header_title': 'Linux Commands Cheat Sheet',
-            'header_subtitle': 'Powered by The AI Real Estate Investor',
-            'banner_content': '''
-                <div class="aire-links">
-                    <a href="https://www.theairealestateinvestor.com">🌟 Join Our AI Community</a>
-                    <a href="https://www.facebook.com/aireinvestor">📱 Follow Us</a>
-                    <span class="easter-egg">🎁</span>
-                </div>
-            '''.strip(),
-            'footer': '<footer><p>© 2024 The AI Real Estate Investor</p></footer>'
-        }
-        
-        html_output = render_template('index.html', template_vars)
-        with open(html_file, 'w') as f:
-            f.write(html_output)
-            
+
+        logger.info("Successfully converted markdown to HTML")
+        return True
+
     except Exception as e:
-        logger.error(f"Failed to convert markdown to HTML: {str(e)}")
-        raise
+        logger.error(f"Failed to convert markdown to HTML: {e}")
+        logger.debug(f"Current working directory: {os.getcwd()}")
+        return False
 
 def find_free_port(start_port=8000, max_attempts=100):
     """Find a free port starting from start_port"""
@@ -139,8 +131,25 @@ def print_welcome_banner():
     """
     print(banner)
 
+def resize_image(input_path, output_path, max_width):
+    """Resize image while maintaining aspect ratio"""
+    try:
+        with Image.open(input_path) as img:
+            # Calculate new height to maintain aspect ratio
+            ratio = max_width / float(img.size[0])
+            new_height = int(float(img.size[1]) * ratio)
+            
+            # Resize image
+            resized_img = img.resize((max_width, new_height), Image.Resampling.LANCZOS)
+            resized_img.save(output_path, quality=90, optimize=True)
+            
+        return True
+    except Exception as e:
+        logger.error(f"Failed to resize image: {e}")
+        return False
+
 def copy_assets(output_dir):
-    """Copy assets to output directory"""
+    """Copy and optimize assets to output directory"""
     try:
         logger.info("Starting asset copy process...")
         
@@ -149,8 +158,6 @@ def copy_assets(output_dir):
         css_dir = os.path.join(assets_dir, 'css')
         images_dir = os.path.join(assets_dir, 'images')
         
-        # Log directory creation
-        logger.debug(f"Creating directories: {css_dir}, {images_dir}")
         os.makedirs(css_dir, exist_ok=True)
         os.makedirs(images_dir, exist_ok=True)
         
@@ -158,38 +165,26 @@ def copy_assets(output_dir):
         base_dir = os.path.dirname(__file__)
         src_assets = os.path.join(base_dir, 'public', 'assets')
         
-        # Log source paths
-        logger.debug(f"Source assets directory: {src_assets}")
-        
-        # CSS
-        src_css = os.path.join(src_assets, 'css', 'style.css')
-        dst_css = os.path.join(css_dir, 'style.css')
-        logger.debug(f"Copying CSS from {src_css} to {dst_css}")
-        if os.path.exists(src_css):
-            shutil.copy2(src_css, dst_css)
-            logger.info("✅ CSS copied successfully")
-        else:
-            logger.error(f"❌ CSS file not found at {src_css}")
-        
-        # Logo
+        # Copy and optimize logo
         src_logo = os.path.join(src_assets, 'images', 'aire-logo-official.jpeg')
         dst_logo = os.path.join(images_dir, 'aire-logo-official.jpeg')
-        logger.debug(f"Copying logo from {src_logo} to {dst_logo}")
         if os.path.exists(src_logo):
-            shutil.copy2(src_logo, dst_logo)
-            logger.info("✅ Logo copied successfully")
-        else:
-            logger.error(f"❌ Logo file not found at {src_logo}")
+            resize_image(src_logo, dst_logo, 150)  # Resize to max width of 150px
+            logger.info("✅ Logo copied and optimized")
         
-        # Favicon
+        # Copy favicon (no resize needed)
         src_favicon = os.path.join(src_assets, 'images', 'favicon.ico')
         dst_favicon = os.path.join(images_dir, 'favicon.ico')
-        logger.debug(f"Copying favicon from {src_favicon} to {dst_favicon}")
         if os.path.exists(src_favicon):
             shutil.copy2(src_favicon, dst_favicon)
-            logger.info("✅ Favicon copied successfully")
-        else:
-            logger.error(f"❌ Favicon file not found at {src_favicon}")
+            logger.info("✅ Favicon copied")
+        
+        # Copy CSS
+        src_css = os.path.join(src_assets, 'css', 'style.css')
+        dst_css = os.path.join(css_dir, 'style.css')
+        if os.path.exists(src_css):
+            shutil.copy2(src_css, dst_css)
+            logger.info("✅ CSS copied")
             
     except Exception as e:
         logger.exception(f"Failed to copy assets: {str(e)}")
@@ -204,11 +199,8 @@ def main():
         base_dir = os.path.dirname(__file__)
         input_file = os.path.join(base_dir, 'public', 'linux_cheats.txt')
         output_dir = os.path.join(base_dir, 'output')
+        md_file = os.path.join(output_dir, 'linux_cheatsheet.md')
         html_file = os.path.join(output_dir, 'linux_cheatsheet.html')
-        
-        logger.debug(f"Base directory: {base_dir}")
-        logger.debug(f"Input file: {input_file}")
-        logger.debug(f"Output directory: {output_dir}")
         
         # Create output directory
         os.makedirs(output_dir, exist_ok=True)
@@ -218,9 +210,15 @@ def main():
         logger.info("🎨 Setting up assets...")
         copy_assets(output_dir)
         
-        # Convert to HTML
-        logger.info("📝 Generating cheat sheet...")
-        convert_markdown_to_html(input_file, html_file)
+        # Convert TXT to MD
+        logger.info("📝 Converting text to markdown...")
+        if not convert_text_to_markdown(input_file, md_file):
+            raise Exception("Failed to convert text to markdown")
+            
+        # Convert MD to HTML
+        logger.info("🌐 Converting markdown to HTML...")
+        if not convert_markdown_to_html(md_file, html_file):
+            raise Exception("Failed to convert markdown to HTML")
         
         # Show welcome banner
         print_welcome_banner()

@@ -8,7 +8,8 @@ setup(
     install_requires=[
         'pandoc',
         'markdown',
-        'loguru'
+        'loguru',
+        'Pillow'
     ],
     entry_points={
         'console_scripts': [
@@ -26,4 +27,13 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3',
     ],
+    package_data={
+        'linux_cheats_cli': [
+            'public/templates/*',
+            'public/assets/css/*',
+            'public/assets/images/*',
+            'public/linux_cheats.txt'
+        ]
+    },
+    include_package_data=True,
 )
