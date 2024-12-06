@@ -78,8 +78,8 @@
 ### Powered by The AI Real Estate Investor
 
 Join our community of AI-powered entrepreneurs:
-- [Join Our AI Community](https://www.theairealestateinvestor.com)
-- [Follow Us on Facebook](https://www.facebook.com/aireinvestor)
-- [AI Revolutionaries Club](https://www.theairealestateinvestor.com/club)
+- 🌐 [Join Our AI Community](https://www.theairealestateinvestor.com)
+- 📱 [Follow Us on Facebook](https://www.facebook.com/aireinvestor)
+- 💡 [Join AI Revolutionaries Club](https://www.theairealestateinvestor.com/membership)
 
 *Tip: Look for easter eggs in the commands!*

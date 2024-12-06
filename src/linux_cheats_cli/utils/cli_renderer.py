@@ -48,26 +48,29 @@ def print_cli_version(data):
         return
         
     try:
-        # Print banner
+        # Print banner once
         console.print("\n" + "="*50)
         print("   🚀 === Linux Cheats CLI === 🚀")
         print("    Powered by The AI Real Estate Investor")
         print("\n    💡 Pro Tip: Try 'linux-cheats --aire' for special commands!")
         print("    🎁 Hidden Feature: Look for the easter egg in the web view")
         print("\n    Join our AI Revolution:")
-        print("    🌐 www.theairealestateinvestor.com")
-        print("    📱 facebook.com/aireinvestor")
+        # Make URLs clickable with rich
+        console.print("    🌐 ", end="")
+        console.print("[link=https://www.theairealestateinvestor.com]www.theairealestateinvestor.com[/link]")
+        console.print("    📱 ", end="")
+        console.print("[link=https://facebook.com/aireinvestor]facebook.com/aireinvestor[/link]")
         print("\n")
         
         # Parse and render command tables
         sections = parse_data(data)
         render_cli_table(sections)
         
-        # Print footer with correct membership link
+        # Print footer with clickable links
         console.print("\nTips & Links:")
         console.print("• Web version: linux-cheats")
-        console.print("• Visit: https://www.theairealestateinvestor.com")
-        console.print("• Join AI Revolutionaries Club ($7/month): https://www.theairealestateinvestor.com/membership")
+        console.print("• Visit: [link=https://www.theairealestateinvestor.com]www.theairealestateinvestor.com[/link]")
+        console.print("• Join Club: [link=https://www.theairealestateinvestor.com/membership]AI Revolutionaries ($7/month)[/link]")
         
     except Exception as e:
         console.print(f"[bold red]Error rendering CLI output: {e}[/bold red]")

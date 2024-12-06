@@ -27,25 +27,55 @@ Brought to you by [The AI Real Estate Investor](https://www.theairealestateinves
 
 ### Installing the Package
 
++ > 📝 **Note:** Package will be available on PyPI soon! Currently only installable from source.
++ 
+1. Install system dependencies:
+
+```bash
+# Ubuntu/Debian
+sudo apt-get install pandoc python3-pip
+
+# macOS
+brew install pandoc
+
+# Windows
+choco install pandoc
+```
+
+2. Install the package:
+
 ```bash
 # Clone the repository
 git clone https://github.com/theaireinvestor/linux-cheats-cli.git
 cd linux-cheats-cli
 
-# Install the package
+# Install dependencies
+pip install -r requirements.txt
+
+# Install in development mode
 pip install -e .
 ```
 
 ## Usage 💻
 
+After installation, the tool will automatically:
+1. Show the CLI version with colorful command tables
+2. Start the web interface in your default browser
+
+You can also run specific modes:
+
 ```bash
-# Launch the cheat sheet viewer
+# Show both CLI and web interface (default)
 linux-cheats
 
-# The tool will:
-# 1. Start a local server
-# 2. Open your default browser
-# 3. Display the cheat sheet beautifully formatted
+# Only show CLI version
+linux-cheats --cli
+
+# Only start web interface
+linux-cheats --web
+
+# Start web interface without opening browser
+linux-cheats --web --no-browser
 ```
 
 ## Command Categories 📋
@@ -78,7 +108,7 @@ linux-cheats-cli/
 │       ├── utils/
 │       │   ├── convert_to_md.py
 │       │   └── template.py
-│       └── main.py
+│       ���── main.py
 ├── setup.py
 └── README.md
 ```

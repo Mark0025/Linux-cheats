@@ -16,7 +16,7 @@ def add_aire_branding(markdown_content):
         "\nJoin our community of AI-powered entrepreneurs:",
         "- 🌐 [Join Our AI Community](https://www.theairealestateinvestor.com)",
         "- 📱 [Follow Us on Facebook](https://www.facebook.com/aireinvestor)",
-        "- 💡 Get more AI tools and tips in our [AI Revolutionaries Club](https://www.theairealestateinvestor.com/club)",
+        "- 💡 [Join AI Revolutionaries Club](https://www.theairealestateinvestor.com/membership)",
         "\n*Tip: Look for easter eggs in the commands!*"
     ]
     if isinstance(markdown_content, str):
@@ -64,9 +64,9 @@ def convert_text_to_markdown(input_file, output_file):
             "\n---",
             "\n### Powered by The AI Real Estate Investor",
             "\nJoin our community of AI-powered entrepreneurs:",
-            "- [Join Our AI Community](https://www.theairealestateinvestor.com)",
-            "- [Follow Us on Facebook](https://www.facebook.com/aireinvestor)",
-            "- [AI Revolutionaries Club](https://www.theairealestateinvestor.com/club)",
+            "- 🌐 [Join Our AI Community](https://www.theairealestateinvestor.com)",
+            "- 📱 [Follow Us on Facebook](https://www.facebook.com/aireinvestor)",
+            "- 💡 [Join AI Revolutionaries Club](https://www.theairealestateinvestor.com/membership)",
             "\n*Tip: Look for easter eggs in the commands!*"
         ])
             

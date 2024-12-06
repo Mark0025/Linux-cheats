@@ -1,178 +1,68 @@
-/* Default styles if custom CSS is not found */
+/* Update body background */
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    margin: 20px;
-    background-color: #f4f4f9;
-    max-width: 1200px;
-    margin: 0 auto;
+    margin: 0;  /* Remove margin to allow full-width header */
+    background-color: #f0f2f5;  /* Light grey background */
+    color: #333;
 }
 
+/* Dark contrasting header */
 .aire-banner {
-    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    background: linear-gradient(to right, #1a1a1a, #2c3e50);  /* Dark gradient */
     color: white;
-    padding: 20px;
+    padding: 30px 20px;
     text-align: center;
-    margin-bottom: 30px;
-    border-radius: 0;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    margin: 0;  /* Remove margin for full width */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     position: relative;
     width: 100%;
-    left: 0;
-    top: 0;
+    border-bottom: 3px solid #3498db;  /* Blue accent line */
 }
 
-.aire-logo {
-    /* CSS-based logo instead of image */
-    font-size: 2em;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-}
-
-.content {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.command-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: 'Monaco', 'Consolas', monospace;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.command-table thead tr {
-    background-color: #2c3e50;
-    color: #ffffff;
-    text-align: left;
-}
-
-.command-table th,
-.command-table td {
-    padding: 12px 15px;
-    white-space: nowrap;
-}
-
-.command-table th:nth-child(1) { min-width: 120px; }  /* Command */
-.command-table th:nth-child(2) { min-width: 200px; }  /* Purpose */
-.command-table th:nth-child(3) { min-width: 150px; }  /* Mnemonic */
-.command-table th:nth-child(4) { min-width: 200px; }  /* Example */
-
-.command-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-.command-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-.command-table tbody tr:last-of-type {
-    border-bottom: 2px solid #2c3e50;
-}
-
-/* Responsive table wrapper */
-.table-wrapper {
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    margin: 20px 0;
-    border-radius: 5px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Command styling */
-.command {
-    font-weight: bold;
-    color: #2c3e50;
-    background: #f8f9fa;
-    padding: 2px 5px;
-    border-radius: 3px;
-}
-
-/* Example styling */
-.example {
-    font-family: 'Monaco', 'Consolas', monospace;
-    background: #f8f9fa;
-    padding: 2px 5px;
-    border-radius: 3px;
-    color: #e83e8c;
-}
-
-.aire-footer {
-    text-align: center;
-    padding: 20px;
-    margin-top: 40px;
-    border-top: 1px solid #ddd;
-}
-
-.aire-links {
-    margin: 20px 0;
-}
-
-.aire-links a {
-    color: white;
-    text-decoration: none;
-    margin: 0 10px;
-    padding: 5px 10px;
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
-.aire-links a:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: white;
-}
-
-.easter-egg {
-    cursor: help;
-    opacity: 0.8;
-}
-
-.easter-egg:hover {
-    opacity: 1;
-}
-
-/* Logo sizing and positioning */
+/* Update logo styling */
 .aire-logo-img {
     max-width: 150px;
     height: auto;
-    margin: 0 auto 15px;
+    margin: 0 auto 20px;
     display: block;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
 }
 
-/* Favicon specific styles */
-.favicon {
-    width: 32px;
-    height: 32px;
+.aire-logo-img:hover {
+    transform: scale(1.05);
 }
 
 /* Banner text styling */
 .aire-banner h1 {
-    font-size: 2em;
-    margin: 10px 0;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-size: 2.5em;
+    margin: 15px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-weight: 600;
 }
 
 .aire-banner p {
-    font-size: 1.1em;
-    margin: 5px 0;
+    font-size: 1.2em;
+    margin: 10px 0;
     opacity: 0.9;
+    font-weight: 300;
 }
 
-/* Banner links */
+/* Content area styling */
+.content {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Update link styling */
 .aire-links {
-    margin: 15px 0 5px;
+    margin: 25px 0 10px;
 }
 
 .aire-links a {
@@ -180,36 +70,42 @@ body {
     color: white;
     text-decoration: none;
     margin: 0 10px;
-    padding: 8px 15px;
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 4px;
+    padding: 10px 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 5px;
     transition: all 0.3s ease;
-    font-size: 0.9em;
+    font-size: 1em;
+    background: rgba(255,255,255,0.1);
 }
 
 .aire-links a:hover {
-    background: rgba(255,255,255,0.1);
-    border-color: white;
-    transform: translateY(-1px);
+    background: rgba(255,255,255,0.2);
+    border-color: #3498db;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* Main content padding */
-.content {
-    padding-top: 20px;
+/* Table header styling */
+.command-table thead tr {
+    background: #1a1a1a;  /* Match header dark theme */
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9em;
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .aire-banner {
-        padding: 15px;
+        padding: 20px 15px;
+    }
+    
+    .aire-banner h1 {
+        font-size: 1.8em;
     }
     
     .aire-logo-img {
         max-width: 120px;
-    }
-    
-    .aire-banner h1 {
-        font-size: 1.5em;
     }
     
     .aire-links a {
@@ -217,4 +113,33 @@ body {
         margin: 10px auto;
         max-width: 200px;
     }
+}
+
+.easter-egg {
+    cursor: help;
+    opacity: 0.8;
+    position: relative;
+}
+
+.easter-egg:hover {
+    opacity: 1;
+}
+
+.easter-egg:hover::after {
+    content: 'Join our AI Revolutionaries Club for $7/month';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    white-space: nowrap;
+    margin-bottom: 5px;
+}
+
+.membership-link {
+    text-decoration: none;
 } 

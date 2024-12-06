@@ -276,8 +276,7 @@ def setup_web_interface(base_dir, auto_open=True):
     convert_text_to_markdown(os.path.join(base_dir, 'public', 'linux_cheats.txt'), md_file)
     convert_markdown_to_html(md_file, html_file)
     
-    # Show welcome banner and start server
-    print_welcome_banner()
+    # Start server (removed duplicate banner)
     serve_html(output_dir, auto_open=auto_open)
 
 if __name__ == "__main__":

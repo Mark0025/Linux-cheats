@@ -1,0 +1,49 @@
+# Python Packaging Best Practices 🐍
+
+## Installation Flow
+1. Keep setup.py simple - just handle installation
+2. Use entry_points for commands
+3. Separate installation from first run
+4. Use wrapper scripts for complex startup sequences
+
+## Race Conditions
+- ❌ Don't: Run commands directly in setup.py
+- ❌ Don't: Try to import package during install
+- ✅ Do: Use wrapper scripts (start.sh) for first run
+- ✅ Do: Show clear instructions after install
+
+## Example Pattern
+```bash
+# Wrapper script (start.sh)
+#!/bin/bash
+pip install -e .
+sleep 1  # Wait for install
+linux-cheats --cli  # Run CLI
+linux-cheats --web & # Start web
+```
+
+## Setup.py Pattern
+```python
+setup(
+    entry_points={
+        'console_scripts': [
+            'main-command=package.main:main',
+            'setup-command=package.scripts.setup:post_install',
+        ],
+    }
+)
+```
+
+## Post-Install Pattern
+```python
+def post_install():
+    """Show instructions after install"""
+    print("\n✨ Installation complete!")
+    print("To start, run: command-name")
+```
+
+## Remember
+- Keep installation and execution separate
+- Use wrapper scripts for complex flows
+- Follow the principle of least surprise
+- Give clear user instructions 
